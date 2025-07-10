@@ -25,12 +25,12 @@
                             {{ $post->category->name ?? 'Uncategorized' }}
                         </span>
                         <h3 class="text-lg font-semibold mb-1 hover:text-amber-600 transition-colors truncate">
-                            <a href="{{ url('/posts/' . $post->slug) }}" title="{{ $post->title }}">{{ $post->title }}</a>
+                            <a href="{{ url('/posts/' . $post->id) }}" title="{{ $post->title }}">{{ $post->title }}</a>
                         </h3>
                         <p class="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-3">
                             {!! Str::limit(strip_tags($post->content), 100) !!}
                         </p>
-                        <a href="{{ url('/posts/' . $post->slug) }}" class="inline-block bg-amber-600 hover:bg-amber-700 text-white font-semibold py-1 px-3 rounded transition text-sm">
+                        <a href="{{ url('/posts/' . $post->id) }}" class="inline-block bg-amber-600 hover:bg-amber-700 text-white font-semibold py-1 px-3 rounded transition text-sm">
                             Read More
                         </a>
                     </div>
