@@ -17,11 +17,14 @@
                         seorang pengusaha muda asli Lampung dan sebagai Trainer dan Motivator. Namun ia lebih dikenal The Most Wanted Indonesian Hypnotherapy instructor, kini ia lebih kenal sebagai MOTIVATOR DAN PENGUSAHA MUDA.
                     </p>
                     <div class="flex gap-4">
-                        <a href="https://www.instagram.com/mr.syaifulloh/" target="_blank" rel="noopener" class="bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-6 rounded-lg transition">
+                        <a href="https://www.instagram.com/mr.syaifulloh/" target="_blank" rel="noopener" class="bg-pink-600 hover:bg-pink-700 text-white font-semibold py-3 px-6 rounded-lg transition">
                             Instagram
                         </a>
-                        <a href="https://www.linkedin.com/in/syaifulloh17/" target="_blank" rel="noopener" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition">
+                        <a href="https://www.linkedin.com/in/syaifulloh17/" target="_blank" rel="noopener" class="bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-6 rounded-lg transition">
                             LinkedIn
+                        </a>
+                        <a href="/cv/profile.pdf" download class="bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-6 rounded-lg transition">
+                            Download CV
                         </a>
                     </div>
                 </div>
@@ -189,16 +192,17 @@
         </div>
     </section>
 
-    {{-- Kontak (Contact) Section --}}
-    <section id="kontak" class="bg-white dark:bg-gray-800 py-16 px-4">
+    {{-- Contact Section --}}
+    <section id="contact" class="bg-white dark:bg-gray-800 py-16 px-4">
         <h2 class="text-3xl font-bold mb-6 text-center">Contact Me</h2>
-        <form action="/contact" method="POST" class="max-w-xl mx-auto space-y-6">
-            @csrf
-            <input type="text" name="name" placeholder="Your Name" required class="w-full p-3 rounded border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-            <input type="email" name="email" placeholder="Your Email" required class="w-full p-3 rounded border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-            <textarea name="message" rows="5" placeholder="Your Message" required class="w-full p-3 rounded border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100"></textarea>
-            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition w-full">Send Message</button>
-        </form>
+        <div class="max-w-3xl mx-auto text-center text-gray-700 dark:text-gray-300 space-y-6">
+            <p class="text-lg">
+                Jika Anda ingin menghubungi saya untuk kerja sama atau kolaborasi, silakan hubungi melalui Instagram berikut:
+            </p>
+            <a href="https://www.instagram.com/mr.syaifulloh/" target="_blank" rel="noopener" class="inline-block bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-6 rounded-lg transition">
+                Chat Me!
+            </a>
+        </div>
     </section>
 
 <script>
