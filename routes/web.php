@@ -3,25 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 use App\Models\Gallery;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 
 // Route untuk Home
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index']);
 
 // Route untuk Daftar Post
-Route::get('/posts', function () {
-    $posts = Post::with('category')->latest()->paginate(10);
-    return view('posts.index', compact('posts'));
-});
+Route::get('/posts', [PostController::class, 'index']);
 
 // Route untuk Detail Post
-Route::get('/posts/{post}', function (Post $post) {
-    return view('posts.show', compact('post'));
-});
-
-// Route untuk Daftar Galeri
-Route::get('/gallery', function () {
-    $galleries = Gallery::latest()->paginate(12);
-    return view('gallery.index', compact('galleries'));
-});
+Route::get('/posts/{post}', [PostController::class, 'show']);
