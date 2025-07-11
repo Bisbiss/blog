@@ -10,11 +10,13 @@
         <div class="container mx-auto max-w-7xl">
             <div class="md:flex md:items-center md:gap-8">
                 {{-- Left Column --}}
-                <div class="md:w-1/2 flex flex-col justify-center items-center md:items-start px-5">
+                <div class="md:w-2/3 flex flex-col justify-center items-center md:items-start px-5">
                     <h1 class="text-5xl font-extrabold mb-4">Hi 👋</h1>
                     <h1 class="text-5xl font-extrabold mb-4">Saya Syaifulloh</h1>
-                    <p class="text-lg max-w-md mb-6">
-                        seorang pengusaha muda asli Lampung dan sebagai Trainer dan Motivator. Namun ia lebih dikenal The Most Wanted Indonesian Hypnotherapy instructor, kini ia lebih kenal sebagai MOTIVATOR DAN PENGUSAHA MUDA.
+                    <p class="text-lg max-w-full mb-6">
+                        Saya Syaifulloh, seorang pengusaha asal Lampung, Indonesia. Selain menjalankan bisnis, saya juga dikenal sebagai pembicara publik, motivator, trainer, dan learning facilitator.
+                        <br><br>
+                        Selama lebih dari 13 tahun, saya telah mengabdikan diri di dunia pelatihan dan pengembangan SDM. Saya berpengalaman membawakan berbagai sesi di lingkungan korporasi, universitas, sekolah, perusahaan swasta, hingga pelaku UKM—baik skala kecil maupun besar.
                     </p>
                     <div class="flex gap-4">
                         <a href="https://www.instagram.com/mr.syaifulloh/" target="_blank" rel="noopener" class="bg-pink-600 hover:bg-pink-700 text-white font-semibold py-3 px-6 rounded-lg transition">
@@ -23,14 +25,14 @@
                         <a href="https://www.linkedin.com/in/syaifulloh17/" target="_blank" rel="noopener" class="bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-6 rounded-lg transition">
                             LinkedIn
                         </a>
-                        <a href="/cv/profile.pdf" download class="bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-6 rounded-lg transition">
-                            Download CV
+                        <a href="https://www.tiktok.com/@mr.syaifulloh?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener" class="bg-slate-600 hover:bg-slate-700 text-white font-semibold py-3 px-6 rounded-lg transition">
+                            Tiktok
                         </a>
                     </div>
                 </div>
 
                 {{-- Right Column --}}
-                <div class="md:w-1/2 px-4">
+                <div class="md:w-1/3 px-3">
                     <img src="/image/syaifulloh.png" alt="Syaifulloh" class="rounded-lg shadow-lg mx-auto md:mx-0 max-w-full h-auto">
                 </div>
             </div>
@@ -52,39 +54,106 @@
                     Hi, nama saya <span class="text-amber-600 dark:text-amber-400">Syaifulloh</span>, saya sangatlah mencintai dunia pemberdayaan diri dan lingkungan.
                 </p>
                 <p>
-                    Kecintaannya terhadap pemberdayaan manusia membawanya mempelajari dan mengembangkan banyak program edukasi dan bisnis serta training di Lampung.
+                    Kecintaan saya terhadap pemberdayaan manusia membawa saya secara serius untuk mengembangkan banyak program edukasi, bisnis & training di indonesia.
                 </p>
                 <p>
-                    Sebagai bentuk pengabdiannya, Syaiful menjadi seorang <strong>Founder dan CEO Lampung Cerdas</strong> yang dan juga ia sebagai <strong>Founder Positifsukses.com</strong>.
-                </p>
-                <p>
-                    Selain itu ia juga fokus untuk mengembangkan skill-skill para milenial agar siap menghadapi tantangan masa depan.
+                    Dengan semangat membangun generasi cerdas dan tangguh, saya terus berkomitmen untuk menyebarkan inspirasi, pengetahuan, dan strategi pertumbuhan yang berdampak nyata bagi individu maupun organisasi.
                 </p>
             </div>
         </div>
     </section>
 
-    {{-- Expertise Section --}}
-    <section id="expertise" class="bg-white dark:bg-gray-800 py-16 px-4">
-        <h2 class="text-3xl font-bold mb-6 text-center">My Expertise</h2>
-        <div class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-4 gap-8 text-center">
-            <div class="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
-                <h3 class="font-semibold text-xl mb-2">Public Speaking</h3>
-                <p>Confidently delivering engaging and impactful presentations.</p>
-            </div>
-            <div class="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
-                <h3 class="font-semibold text-xl mb-2">Business</h3>
-                <p>Experienced in entrepreneurship and business development.</p>
-            </div>
-            <div class="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
-                <h3 class="font-semibold text-xl mb-2">Hypnotherapy</h3>
-                <p>Skilled in therapeutic techniques to improve mental well-being.</p>
-            </div>
-            <div class="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
-                <h3 class="font-semibold text-xl mb-2">Leadership</h3>
-                <p>Leading teams effectively to achieve goals and growth.</p>
+    {{-- Detail Section --}}
+    <section id="detail" class="bg-white dark:bg-gray-800 py-16 px-4 max-w-full mx-auto">
+        <div class="container mx-auto max-w-5xl">
+            <h2 class="text-3xl font-bold mb-6 text-center">Detail Profile Syaifulloh:</h2>
+            <div class="space-y-4">
+
+                {{-- Accordion 1 --}}
+                <details class="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6">
+                    <summary class="font-semibold text-xl cursor-pointer">Present Activities</summary>
+                    <ul class="mt-3 list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300">
+                        <li>Founder dan CEO Lampung Cerdas.</li>
+                        <li>Founder Youth Inspiration Indonesia.</li>
+                        <li>Pembina Yayasan Pemuda Harapan Dunia</li>
+                        <li>Trainer dan Motivator</li>
+                        <li>Owner Keripik Singkong MADIR</li>
+                        <li>Master therapist Hypnotherapy Center Lampung</li>
+                        <li>Serta telah menginspirasi anak muda Indonesia lebih dari 2.700.000.</li>
+                    </ul>
+                </details>
+
+                {{-- Accordion 2 --}}
+                <details class="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6">
+                    <summary class="font-semibold text-xl cursor-pointer">History Education & Certified</summary>
+                    <ul class="mt-3 list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300">
+                        <li>S1 Ilmu Pemerintahan - Unila</li>
+                        <li>S2 Magister Manajemen - IIB Darmajaya</li>
+                        <li>Promotor Stifin</li>
+                    </ul>
+                </details>
+
+                {{-- Accordion 3 --}}
+                <details class="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6">
+                    <summary class="font-semibold text-xl cursor-pointer">Paling Sering Membahas/berbagi tentang</summary>
+                    <div class="mt-3 text-gray-700 dark:text-gray-300 space-y-4">
+                        <p><strong>Program & Materi yang Sering Saya Bawakan:</strong></p>
+
+                        <p>💡 <strong>Untuk Siswa & Mahasiswa:</strong></p>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>Strategi Lulus Kuliah Impian</li>
+                            <li>Hypno Learning & Hypno Teaching</li>
+                            <li>Membangun Mental Juara Sejak Muda</li>
+                            <li>Growth Mindset & Motivasi Prestasi</li>
+                            <li>Kuliah Gratis dan Beasiswa Impian</li>
+                            <li>Leadership & Komunikasi untuk Generasi muda</li>
+                        </ul>
+
+                        <p>🏢 <strong>Untuk Guru, Dosen & Lembaga Pendidikan:</strong></p>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>Training Hypno Teaching</li>
+                            <li>Komunikasi Edukatif & Persuasif</li>
+                            <li>Strategi Meningkatkan Semangat Belajar Siswa</li>
+                            <li>Pelatihan Public Speaking & Presentation Skill</li>
+                        </ul>
+
+                        <p>👔 <strong>Untuk Umum, Komunitas, Instansi & Korporat:</strong></p>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>Personal Branding & Komunikasi Berpengaruh</li>
+                            <li>Membangun Tim Hebat & Kolaboratif</li>
+                            <li>Mindset Tumbuh untuk Pemimpin Masa Depan</li>
+                            <li>Kelas Resiliensi: Bangkit dalam Tekanan</li>
+                            <li>Marketing Humanis & Closing Hypnotic</li>
+                        </ul>
+
+                        <p>📍 <strong>Fokus Saya Saat Ini:</strong></p>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>Pengembangan SDM & kepemudaan</li>
+                            <li>Pendidikan dan mindset pertumbuhan</li>
+                            <li>Public speaking dan komunikasi efektif</li>
+                            <li>Peningkatan kualitas tenaga pendidik</li>
+                            <li>Personal development dan spiritual leadership</li>
+                        </ul>
+                    </div>
+                </details>
+
             </div>
         </div>
+    </section>
+
+    {{-- Buku Section with 4 Images and Text Above and Below --}}
+    <section id="buku" class="max-w-5xl mx-auto py-16 px-4">
+        <h2 class="text-3xl font-bold mb-6 text-center">Buku</h2>
+        <p class="text-center text-gray-700 text-2xl dark:text-gray-300">Saya juga seorang penulis.</p>
+        <p class="text-center text-gray-700 text-xl dark:text-gray-300 mb-6">Berikut buku-buku best seller yang pernah saya tulis.</p>
+
+        <div class="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-6 mb-6">
+            <img src="/image/1.jpg" alt="Buku 1" class="rounded-lg shadow-lg w-full aspect-square object-cover">
+            <img src="/image/2.jpg" alt="Buku 2" class="rounded-lg shadow-lg w-full aspect-square object-cover">
+            <img src="/image/3.jpg" alt="Buku 3" class="rounded-lg shadow-lg w-full aspect-square object-cover">
+            <img src="/image/4.jpg" alt="Buku 4" class="rounded-lg shadow-lg w-full aspect-square object-cover">
+        </div>
+
     </section>
 
     {{-- Artikel (Articles) Section --}}
@@ -141,35 +210,38 @@
     <section id="achievement" class="max-w-5xl mx-auto py-16 px-4">
         <h2 class="text-3xl font-bold mb-8 text-center">Achievements</h2>
         <div class="md:flex md:gap-12 max-w-4xl mx-auto">
-            {{-- Left: Achievement List --}}
-            <ul class="md:w-1/2 list-disc list-inside space-y-6 text-gray-700 dark:text-gray-300">
-                <li class="flex items-start gap-3">
-                    <svg class="w-6 h-6 text-amber-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.388 2.462a1 1 0 00-.364 1.118l1.287 3.974c.3.922-.755 1.688-1.54 1.118l-3.388-2.462a1 1 0 00-1.175 0l-3.388 2.462c-.784.57-1.838-.196-1.54-1.118l1.287-3.974a1 1 0 00-.364-1.118L2.045 9.4c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69l1.286-3.974z"/>
-                    </svg>
-                    <a href="https://muri.org/Website/Rekor_detail/edukasi_masuk_perguruan_tinggi_secara_digital_kepada_pelajar_terbanyak" target="_blank" class="underline hover:text-amber-600" rel="noopener">
-                        Rekor MURI: Edukasi masuk perguruan tinggi secara digital kepada pelajar terbanyak
-                    </a>
-                </li>
-                <li class="flex items-start gap-3">
-                    <svg class="w-6 h-6 text-amber-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.388 2.462a1 1 0 00-.364 1.118l1.287 3.974c.3.922-.755 1.688-1.54 1.118l-3.388-2.462a1 1 0 00-1.175 0l-3.388 2.462c-.784.57-1.838-.196-1.54-1.118l1.287-3.974a1 1 0 00-.364-1.118L2.045 9.4c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69l1.286-3.974z"/>
-                    </svg>
-                    The Great Champions of Asia Top Millennials Choice in Education Program Award 2024
-                </li>
-                <li class="flex items-start gap-3">
-                    <svg class="w-6 h-6 text-amber-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.388 2.462a1 1 0 00-.364 1.118l1.287 3.974c.3.922-.755 1.688-1.54 1.118l-3.388-2.462a1 1 0 00-1.175 0l-3.388 2.462c-.784.57-1.838-.196-1.54-1.118l1.287-3.974a1 1 0 00-.364-1.118L2.045 9.4c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69l1.286-3.974z"/>
-                    </svg>
-                    BEST PERFORMING BUSINESS WINNER 2022 – Indonesia Award Magazine
-                </li>
-                <li class="flex items-start gap-3">
-                    <svg class="w-6 h-6 text-amber-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.388 2.462a1 1 0 00-.364 1.118l1.287 3.974c.3.922-.755 1.688-1.54 1.118l-3.388-2.462a1 1 0 00-1.175 0l-3.388 2.462c-.784.57-1.838-.196-1.54-1.118l1.287-3.974a1 1 0 00-.364-1.118L2.045 9.4c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69l1.286-3.974z"/>
-                    </svg>
-                    Pioner Trainer Muda (19th) Nasional asal Lampung
-                </li>
-            </ul>
+            <div class="md:w-1/2 py-4">
+                <h4 class="text-2xl font-bold text-center mb-4">Berikut beberapa Achievment :</h4>
+                {{-- Left: Achievement List --}}
+                <ul class="list-disc list-inside space-y-6 text-gray-700 dark:text-gray-300 py-4">
+                    <li class="flex items-start gap-3">
+                        <svg class="w-6 h-6 text-amber-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.388 2.462a1 1 0 00-.364 1.118l1.287 3.974c.3.922-.755 1.688-1.54 1.118l-3.388-2.462a1 1 0 00-1.175 0l-3.388 2.462c-.784.57-1.838-.196-1.54-1.118l1.287-3.974a1 1 0 00-.364-1.118L2.045 9.4c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69l1.286-3.974z"/>
+                        </svg>
+                        <a href="https://muri.org/Website/Rekor_detail/edukasi_masuk_perguruan_tinggi_secara_digital_kepada_pelajar_terbanyak" target="_blank" class="underline hover:text-amber-600" rel="noopener">
+                            Rekor MURI: Edukasi masuk perguruan tinggi secara digital kepada pelajar terbanyak
+                        </a>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <svg class="w-6 h-6 text-amber-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.388 2.462a1 1 0 00-.364 1.118l1.287 3.974c.3.922-.755 1.688-1.54 1.118l-3.388-2.462a1 1 0 00-1.175 0l-3.388 2.462c-.784.57-1.838-.196-1.54-1.118l1.287-3.974a1 1 0 00-.364-1.118L2.045 9.4c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69l1.286-3.974z"/>
+                        </svg>
+                        The Great Champions of Asia Top Millennials Choice in Education Program Award 2024
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <svg class="w-6 h-6 text-amber-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.388 2.462a1 1 0 00-.364 1.118l1.287 3.974c.3.922-.755 1.688-1.54 1.118l-3.388-2.462a1 1 0 00-1.175 0l-3.388 2.462c-.784.57-1.838-.196-1.54-1.118l1.287-3.974a1 1 0 00-.364-1.118L2.045 9.4c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69l1.286-3.974z"/>
+                        </svg>
+                        BEST PERFORMING BUSINESS WINNER 2022 – Indonesia Award Magazine
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <svg class="w-6 h-6 text-amber-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.388 2.462a1 1 0 00-.364 1.118l1.287 3.974c.3.922-.755 1.688-1.54 1.118l-3.388-2.462a1 1 0 00-1.175 0l-3.388 2.462c-.784.57-1.838-.196-1.54-1.118l1.287-3.974a1 1 0 00-.364-1.118L2.045 9.4c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69l1.286-3.974z"/>
+                        </svg>
+                        Pioner Trainer Muda (19th) Nasional asal Lampung
+                    </li>
+                </ul>
+            </div>
 
             {{-- Right: Image Slider --}}
             <div class="md:w-1/2 mt-8 md:mt-0">
@@ -197,9 +269,9 @@
         <h2 class="text-3xl font-bold mb-6 text-center">Contact Me</h2>
         <div class="max-w-3xl mx-auto text-center text-gray-700 dark:text-gray-300 space-y-6">
             <p class="text-lg">
-                Jika Anda ingin menghubungi saya untuk kerja sama atau kolaborasi, silakan hubungi melalui Instagram berikut:
+                Jika Anda ingin menghubungi saya untuk kerja sama atau kolaborasi, silakan hubungi melalui WhatsApp berikut:
             </p>
-            <a href="https://www.instagram.com/mr.syaifulloh/" target="_blank" rel="noopener" class="inline-block bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-6 rounded-lg transition">
+            <a href="https://wa.me/628127154447" target="_blank" rel="noopener" class="inline-block bg-emerald-500 hover:bg-emerald-700 text-white font-semibold py-3 px-6 rounded-lg transition">
                 Chat Me!
             </a>
         </div>
