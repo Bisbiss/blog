@@ -12,7 +12,7 @@
             <div class="card-body p-6">
                 <h1 class="card-title text-3xl font-bold mb-4">{{ $post->title }}</h1>
                 <div class="flex justify-between mb-6 text-sm text-gray-500 dark:text-gray-400">
-                    <span>Category: {{ $post->category->name ?? 'Uncategorized' }}</span>
+                    <span class="bg-amber-500 text-white font-semibold p-2 rounded">Category: {{ $post->category->name ?? 'Uncategorized' }}</span>
                     <span>Posted on {{ $post->created_at->format('M d, Y') }}</span>
                 </div>
                 <div class="card-text prose dark:prose-invert max-w-none">
