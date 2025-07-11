@@ -5,18 +5,22 @@
 @section('content')
 <div class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 px-5">
 
-    {{-- Hero Section --}}
-    <section class="min-h-screen flex flex-col md:flex-row justify-center items-center text-center md:text-left px-4 gap-8">
+    {{-- Hero Section with right column first on mobile --}}
+    <section class="min-h-screen flex flex-col md:flex-row justify-start items-center md:text-left px-4 gap-8">
         <div class="container mx-auto max-w-7xl">
-            <div class="md:flex md:items-center md:gap-8">
+            <div class="md:flex md:items-start md:gap-8">
+                {{-- Right Column first on mobile --}}
+                <div class="md:w-1/3 order-1 md:order-2 p-4">
+                    <img src="/image/syaifulloh.png" alt="Syaifulloh" class="rounded-lg shadow-lg mx-auto md:mx-0 max-w-full h-auto">
+                </div>
                 {{-- Left Column --}}
-                <div class="md:w-2/3 flex flex-col justify-center items-center md:items-start px-5">
+                <div class="md:w-2/3 flex flex-col justify-start order-2 md:order-1 px-5">
                     <h1 class="text-5xl font-extrabold mb-4">Hi 👋</h1>
                     <h1 class="text-5xl font-extrabold mb-4">Saya Syaifulloh</h1>
-                    <p class="text-lg max-w-full mb-6">
-                        Saya Syaifulloh, seorang pengusaha asal Lampung, Indonesia. Selain menjalankan bisnis, saya juga dikenal sebagai pembicara publik, motivator, trainer, dan learning facilitator.
+                    <p class="max-w-full mb-6">
+                        Seorang pengusaha asal Lampung, Indonesia. Selain menjalankan bisnis, saya juga dikenal sebagai pembicara publik, motivator, trainer, dan learning facilitator.
                         <br><br>
-                        Selama lebih dari 13 tahun, saya telah mengabdikan diri di dunia pelatihan dan pengembangan SDM. Saya berpengalaman membawakan berbagai sesi di lingkungan korporasi, universitas, sekolah, perusahaan swasta, hingga pelaku UKM—baik skala kecil maupun besar.
+                        Selama lebih dari 13 tahun, saya telah mengabdikan diri di dunia pelatihan dan pengembangan SDM. Saya berpengalaman membawakan berbagai sesi di lingkungan korporasi, universitas, sekolah, perusahaan swasta, hingga pelaku UKM—baik skala kecil maupun besar.
                     </p>
                     <div class="flex gap-4">
                         <a href="https://www.instagram.com/mr.syaifulloh/" target="_blank" rel="noopener" class="bg-pink-600 hover:bg-pink-700 text-white font-semibold py-3 px-6 rounded-lg transition">
@@ -29,11 +33,6 @@
                             Tiktok
                         </a>
                     </div>
-                </div>
-
-                {{-- Right Column --}}
-                <div class="md:w-1/3 px-3">
-                    <img src="/image/syaifulloh.png" alt="Syaifulloh" class="rounded-lg shadow-lg mx-auto md:mx-0 max-w-full h-auto">
                 </div>
             </div>
         </div>
@@ -50,9 +49,6 @@
 
             {{-- Right: Text --}}
             <div class="md:w-1/2 text-gray-700 dark:text-gray-300 leading-relaxed space-y-6 text-center md:text-left">
-                <p class="text-lg font-semibold">
-                    Hi, nama saya <span class="text-amber-600 dark:text-amber-400">Syaifulloh</span>, saya sangatlah mencintai dunia pemberdayaan diri dan lingkungan.
-                </p>
                 <p>
                     Kecintaan saya terhadap pemberdayaan manusia membawa saya secara serius untuk mengembangkan banyak program edukasi, bisnis & training di indonesia.
                 </p>
@@ -90,6 +86,17 @@
                         <li>S1 Ilmu Pemerintahan - Unila</li>
                         <li>S2 Magister Manajemen - IIB Darmajaya</li>
                         <li>Promotor Stifin</li>
+                        <li>Certified Instructor Hypnotherapy (CI) from Indonesian Board of Hypnotherapy (IBH)</li>
+                        <li>Certified Hypnotherapy (CHt) from Indonesian Board of Hypnotherapy (IBH)</li>
+                        <li>Certified Hypnosis (CH) from Indonesian Board of Hypnotherapy (IBH)</li>
+                        <li>Certified NLP Practitioner from Neo NLP Indonesia</li>
+                        <li>Certified NLP Master Practitioner from NLP Indonesia</li>
+                        <li>Mapping Talent Practitioner</li>
+                        <li>Certified Instructor Trainer from BNSP</li>
+                        <li>Sekolah CEO 1.0 from BisnisHack Indonesia</li>
+                        <li>Sekolah HRD from BisnisHack Indonesia</li>
+                        <li>Grounded Business Coaching (GBC) led by Coach Dr. Fahmi</li>
+                        <li>Smart Financial Map by Ilmu Keuangan</li>
                     </ul>
                 </details>
 
@@ -144,8 +151,8 @@
     {{-- Media & Publikasi Section --}}
     <section id="media-publikasi" class="max-w-5xl mx-auto py-16 px-4">
         <h2 class="text-3xl font-bold mb-6 text-center">Media & Publikasi</h2>
-        <div class="max-w-4xl mx-auto">
-            <img src="/image/1.jpg" alt="Media & Publikasi" class="w-full h-auto rounded-lg shadow-lg object-cover">
+        <div class="max-w-4xl mx-auto rounded-lg shadow-lg">
+            <img src="/image/media.png" alt="Media & Publikasi" class="w-full h-auto rounded-lg shadow-lg object-cover">
         </div>
     </section>
 
@@ -155,9 +162,8 @@
         <p class="text-center text-gray-700 text-2xl dark:text-gray-300">Saya juga seorang penulis.</p>
         <p class="text-center text-gray-700 text-xl dark:text-gray-300 mb-6">Berikut buku-buku best seller yang pernah saya tulis.</p>
 
-        <div class="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-6 mb-6">
+        <div class="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-3 gap-6 mb-6">
             <img src="/image/1.jpg" alt="Buku 1" class="rounded-lg shadow-lg w-full aspect-square object-cover">
-            <img src="/image/2.jpg" alt="Buku 2" class="rounded-lg shadow-lg w-full aspect-square object-cover">
             <img src="/image/3.jpg" alt="Buku 3" class="rounded-lg shadow-lg w-full aspect-square object-cover">
             <img src="/image/4.jpg" alt="Buku 4" class="rounded-lg shadow-lg w-full aspect-square object-cover">
         </div>
@@ -255,10 +261,9 @@
             <div class="md:w-1/2 mt-8 md:mt-0">
                 <div class="relative w-full overflow-hidden rounded-lg shadow-lg">
                     <div class="slider flex transition-transform duration-500">
-                        <img src="/image/syaifulloh.png" alt="Achievement 1" class="w-full h-100 bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden object-cover flex-shrink-0">
-                        <img src="/image/about.png" alt="Achievement 2" class="w-full h-100 bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden object-cover flex-shrink-0">
-                        <img src="/image/syaifulloh.png" alt="Achievement 3" class="w-full h-100 bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden object-cover flex-shrink-0">
-                        <img src="/image/about.png" alt="Achievement 4" class="w-full h-100 bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden object-cover flex-shrink-0">
+                        <img src="/image/awward1.jpg" alt="Achievement 1" class="w-full h-80 bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden object-cover flex-shrink-0">
+                        <img src="/image/awward2.jpg" alt="Achievement 3" class="w-full h-80 bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden object-cover flex-shrink-0">
+                        <img src="/image/awward3.jpg" alt="Achievement 4" class="w-full h-80 bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden object-cover flex-shrink-0">
                     </div>
                     {{-- Slider controls --}}
                     <button id="achievementPrevBtn" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-amber-600 text-white rounded-full p-2 hover:bg-amber-700 transition">
