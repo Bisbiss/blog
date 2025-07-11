@@ -141,6 +141,14 @@
         </div>
     </section>
 
+    {{-- Media & Publikasi Section --}}
+    <section id="media-publikasi" class="max-w-5xl mx-auto py-16 px-4">
+        <h2 class="text-3xl font-bold mb-6 text-center">Media & Publikasi</h2>
+        <div class="max-w-4xl mx-auto">
+            <img src="/image/1.jpg" alt="Media & Publikasi" class="w-full h-auto rounded-lg shadow-lg object-cover">
+        </div>
+    </section>
+
     {{-- Buku Section with 4 Images and Text Above and Below --}}
     <section id="buku" class="max-w-5xl mx-auto py-16 px-4">
         <h2 class="text-3xl font-bold mb-6 text-center">Buku</h2>
