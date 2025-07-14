@@ -10,26 +10,26 @@
         <div class="container mx-auto max-w-7xl">
             <div class="md:flex md:items-start md:gap-8">
                 {{-- Right Column first on mobile --}}
-                <div class="md:w-1/3 order-1 md:order-2 p-4">
+                <div class="md:w-1/3 order-1 md:order-2">
                     <img src="/image/syaifulloh.png" alt="Syaifulloh" class="rounded-lg shadow-lg mx-auto md:mx-0 max-w-full h-auto">
                 </div>
                 {{-- Left Column --}}
                 <div class="md:w-2/3 flex flex-col justify-start order-2 md:order-1 px-5">
-                    <h1 class="text-5xl font-extrabold mb-4">Hi 👋</h1>
-                    <h1 class="text-5xl font-extrabold mb-4">Saya Syaifulloh</h1>
+                    <h1 class="text-4xl font-extrabold mb-4">Hi 👋</h1>
+                    <h1 class="text-4xl font-extrabold mb-4">Saya Syaifulloh</h1>
                     <p class="max-w-full mb-6">
                         Seorang pengusaha asal Lampung, Indonesia. Selain menjalankan bisnis, saya juga dikenal sebagai pembicara publik, motivator, trainer, dan learning facilitator.
                         <br><br>
                         Selama lebih dari 13 tahun, saya telah mengabdikan diri di dunia pelatihan dan pengembangan SDM. Saya berpengalaman membawakan berbagai sesi di lingkungan korporasi, universitas, sekolah, perusahaan swasta, hingga pelaku UKM—baik skala kecil maupun besar.
                     </p>
-                    <div class="flex gap-4">
-                        <a href="https://www.instagram.com/mr.syaifulloh/" target="_blank" rel="noopener" class="bg-pink-600 hover:bg-pink-700 text-white font-semibold py-3 px-6 rounded-lg transition">
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <a href="https://www.instagram.com/mr.syaifulloh/" target="_blank" rel="noopener" class="bg-pink-600 hover:bg-pink-700 text-white font-semibold py-3 px-6 rounded-lg transition text-center w-full sm:w-auto mb-2 sm:mb-0">
                             Instagram
                         </a>
-                        <a href="https://www.linkedin.com/in/syaifulloh17/" target="_blank" rel="noopener" class="bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-6 rounded-lg transition">
+                        <a href="https://www.linkedin.com/in/syaifulloh17/" target="_blank" rel="noopener" class="bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-6 rounded-lg transition text-center w-full sm:w-auto mb-2 sm:mb-0">
                             LinkedIn
                         </a>
-                        <a href="https://www.tiktok.com/@mr.syaifulloh?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener" class="bg-slate-600 hover:bg-slate-700 text-white font-semibold py-3 px-6 rounded-lg transition">
+                        <a href="https://www.tiktok.com/@mr.syaifulloh?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener" class="bg-slate-600 hover:bg-slate-700 text-white font-semibold py-3 px-6 rounded-lg transition text-center w-full sm:w-auto">
                             Tiktok
                         </a>
                     </div>
@@ -102,10 +102,8 @@
 
                 {{-- Accordion 3 --}}
                 <details class="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6">
-                    <summary class="font-semibold text-xl cursor-pointer">Paling Sering Membahas/berbagi tentang</summary>
+                    <summary class="font-semibold text-xl cursor-pointer">Program & Materi yang Sering Saya Bawakan:</summary>
                     <div class="mt-3 text-gray-700 dark:text-gray-300 space-y-4">
-                        <p><strong>Program & Materi yang Sering Saya Bawakan:</strong></p>
-
                         <p>💡 <strong>Untuk Siswa & Mahasiswa:</strong></p>
                         <ul class="list-disc list-inside space-y-1">
                             <li>Strategi Lulus Kuliah Impian</li>

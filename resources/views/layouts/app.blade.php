@@ -30,6 +30,7 @@
     <link rel="icon" href="/image/logo.png" type="image/png">
 
     @vite(['resources/css/app.css'])
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans">
 
@@ -55,7 +56,9 @@
 
     {{-- FOOTER --}}
     <footer class="bg-gray-800 text-gray-300 text-center py-6 text-sm">
-        &copy; {{ date('Y') }} Syaifulloh. All rights reserved.
+        <a href="https://lampungcerdas.com">
+            &copy; {{ date('Y') }} Lampung Cerdas. All rights reserved.
+        </a>
     </footer>
 
     <script>
@@ -64,7 +67,7 @@
             const html = document.documentElement;
 
             // Icons for light and dark mode
-            const lightIcon = '🌞'; // sun icon for light mode
+            const lightIcon = '🔆'; // sun icon for light mode
             const darkIcon = '🌙';  // moon icon for dark mode
 
             // Initialize icon based on current theme
