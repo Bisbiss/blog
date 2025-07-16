@@ -23,4 +23,12 @@ class PostController extends Controller
     {
         return view('posts.show', compact('post'));
     }
+
+    // FILEPATH: d:/IT/Development/blog/app/Http/Controllers/PostController.php
+
+    public function showBySlug($slug)
+    {
+        $post = Post::where('slug', $slug)->firstOrFail();
+        return view('posts.show', compact('post'));
+    }
 }

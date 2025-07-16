@@ -13,4 +13,4 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/posts', [PostController::class, 'index']);
 
 // Route untuk Detail Post
-Route::get('/posts/{post}', [PostController::class, 'show']);
+Route::get('/posts/{slug}', [PostController::class, 'showBySlug']);
