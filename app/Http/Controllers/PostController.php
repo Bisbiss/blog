@@ -3,32 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of posts.
-     */
     public function index()
     {
-        $posts = Post::with('category')->latest()->paginate(6);
+        $posts = Post::with('category')->latest()->paginate(12);
+
         return view('posts.index', compact('posts'));
     }
 
-    /**
-     * Display a post.
-     */
     public function show(Post $post)
     {
-        return view('posts.show', compact('post'));
-    }
+        $post->load('category');
 
-    // FILEPATH: d:/IT/Development/blog/app/Http/Controllers/PostController.php
+        // Artikel lain, utamakan yang satu kategori
+        $related = Post::with('category')
+            ->whereKeyNot($post->id)
+            ->orderByRaw('category_id = ? desc', [$post->category_id])
+            ->latest()
+            ->take(4)
+            ->get();
 
-    public function showBySlug($slug)
-    {
-        $post = Post::where('slug', $slug)->firstOrFail();
-        return view('posts.show', compact('post'));
+        return view('posts.show', compact('post', 'related'));
     }
 }

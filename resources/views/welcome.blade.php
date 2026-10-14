@@ -2,313 +2,271 @@
 
 @section('title', 'Home')
 
+@php
+    // Kelas lengkap ditulis di sini supaya terdeteksi Tailwind saat build
+    $socialColors = [
+        'pink' => 'bg-pink-600 hover:bg-pink-700',
+        'sky' => 'bg-sky-600 hover:bg-sky-700',
+        'blue' => 'bg-blue-600 hover:bg-blue-700',
+        'slate' => 'bg-slate-600 hover:bg-slate-700',
+        'red' => 'bg-red-600 hover:bg-red-700',
+        'emerald' => 'bg-emerald-600 hover:bg-emerald-700',
+        'amber' => 'bg-amber-600 hover:bg-amber-700',
+    ];
+    $achievementImages = array_values(array_filter((array) $site['achievement_images']));
+    $heroStats = array_values(array_filter((array) $site['hero_stats'], fn ($stat) => filled($stat['value'] ?? null)));
+
+    // Kata terakhir judul hero diberi warna aksen, contoh: "Saya <Syaifulloh>"
+    $heroTitle = trim((string) $site['hero_title']);
+    $heroTitleStart = str_contains($heroTitle, ' ') ? Str::beforeLast($heroTitle, ' ') : '';
+    $heroTitleEnd = str_contains($heroTitle, ' ') ? Str::afterLast($heroTitle, ' ') : $heroTitle;
+@endphp
+
 @section('content')
-<div class="px-5 text-gray-800 bg-gray-100 dark:bg-gray-900 dark:text-gray-200">
+<div class="text-gray-800 bg-gray-100 dark:bg-gray-900 dark:text-gray-200">
 
-    {{-- Hero Section with right column first on mobile --}}
-    <section class="flex flex-col items-center justify-start min-h-screen gap-8 px-4 md:flex-row md:text-left">
-        <div class="container mx-auto max-w-7xl">
-            <div class="md:flex md:items-start md:gap-8">
-                {{-- Right Column first on mobile --}}
-                <div class="order-1 md:w-1/3 md:order-2">
-                    <img src="/image/syaifulloh.png" alt="Syaifulloh" class="h-auto max-w-full mx-auto rounded-lg shadow-lg md:mx-0">
-                </div>
-                {{-- Left Column --}}
-                <div class="flex flex-col justify-start order-2 px-5 md:w-2/3 md:order-1">
-                    <h1 class="mb-4 text-4xl font-extrabold">Hi 👋</h1>
-                    <h1 class="mb-4 text-4xl font-extrabold">Saya Syaifulloh</h1>
-                    <p class="max-w-full mb-6">
-                        Seorang pengusaha asal Lampung, Indonesia. Selain menjalankan bisnis, saya juga dikenal sebagai pembicara publik, motivator, trainer, dan learning facilitator.
-                        <br><br>
-                        Selama lebih dari 13 tahun, saya telah mengabdikan diri di dunia pelatihan dan pengembangan SDM. Saya berpengalaman membawakan berbagai sesi di lingkungan korporasi, universitas, sekolah, perusahaan swasta, hingga pelaku UKM—baik skala kecil maupun besar.
-                    </p>
-                    <div class="flex flex-col gap-2 sm:flex-row">
-                        <a href="https://www.instagram.com/mr.syaifulloh/" target="_blank" rel="noopener" class="w-full px-6 py-3 mb-2 font-semibold text-center text-white transition bg-pink-600 rounded-lg hover:bg-pink-700 sm:w-auto sm:mb-0">
-                            Instagram
-                        </a>
-                        <a href="https://www.linkedin.com/in/syaifulloh17/" target="_blank" rel="noopener" class="w-full px-6 py-3 mb-2 font-semibold text-center text-white transition rounded-lg bg-sky-600 hover:bg-sky-700 sm:w-auto sm:mb-0">
-                            LinkedIn
-                        </a>
-                        <a href="https://www.tiktok.com/@mr.syaifulloh?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener" class="w-full px-6 py-3 font-semibold text-center text-white transition rounded-lg bg-slate-600 hover:bg-slate-700 sm:w-auto">
-                            Tiktok
-                        </a>
+    {{-- Hero: foto tampil lebih dulu di mobile --}}
+    <section class="relative px-4 pt-10 pb-16 overflow-hidden md:pt-16 md:pb-20">
+        @if ($site['hero_particles'])
+            {{-- Latar partikel (particles.js), diisi canvas oleh resources/js/hero-particles.js --}}
+            <div id="hero-particles" aria-hidden="true" class="absolute inset-0 pointer-events-none"></div>
+        @endif
+        <div aria-hidden="true" class="absolute rounded-full pointer-events-none top-20 -right-32 w-96 h-96 bg-amber-400/20 blur-3xl"></div>
+        <div aria-hidden="true" class="absolute rounded-full pointer-events-none bottom-24 -left-40 w-80 h-80 bg-amber-300/20 blur-3xl dark:bg-amber-500/10"></div>
+
+        <div class="relative mx-auto max-w-7xl">
+            <div class="md:flex md:items-center md:gap-8">
+                @if ($site['hero_image'])
+                    <div class="relative max-w-sm mx-auto mb-8 md:order-2 md:w-2/5 md:max-w-none md:mb-0">
+                        <div aria-hidden="true" class="absolute rounded-full inset-x-[8%] bottom-0 aspect-square bg-gradient-to-tr from-amber-500 to-amber-300 dark:from-amber-600 dark:to-amber-400"></div>
+                        <img src="{{ asset('storage/' . $site['hero_image']) }}" alt="{{ $site['hero_title'] }}" class="relative w-full h-auto">
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                @endif
 
-    {{-- About Section --}}
-    <section id="about" class="max-w-5xl px-4 py-16 mx-auto">
-        <h2 class="mb-8 text-3xl font-bold text-center">About Me</h2>
-        <div class="max-w-4xl mx-auto md:flex md:items-center md:gap-12">
-            {{-- Left: Image --}}
-            <div class="mb-8 overflow-hidden bg-white rounded-lg shadow dark:bg-gray-800 md:w-1/2 md:mb-0">
-                <img src="/image/about.png" alt="Syaifulloh" class="object-cover w-full h-auto rounded-lg shadow-lg">
-            </div>
-
-            {{-- Right: Text --}}
-            <div class="space-y-6 leading-relaxed text-center text-gray-700 md:w-1/2 dark:text-gray-300 md:text-left">
-                <p>
-                    Kecintaan saya terhadap pemberdayaan manusia membawa saya secara serius untuk mengembangkan banyak program edukasi, bisnis & training di indonesia.
-                </p>
-                <p>
-                    Dengan semangat membangun generasi cerdas dan tangguh, saya terus berkomitmen untuk menyebarkan inspirasi, pengetahuan, dan strategi pertumbuhan yang berdampak nyata bagi individu maupun organisasi.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    {{-- Detail Section --}}
-    <section id="detail" class="max-w-full px-4 py-16 mx-auto bg-white dark:bg-gray-800">
-        <div class="container max-w-5xl mx-auto">
-            <h2 class="mb-6 text-3xl font-bold text-center">Detail Profile Syaifulloh:</h2>
-            <div class="space-y-4">
-
-                {{-- Accordion 1 --}}
-                <details class="p-6 bg-white rounded-lg shadow-md dark:bg-gray-900">
-                    <summary class="text-xl font-semibold cursor-pointer">Present Activities</summary>
-                    <ul class="mt-3 space-y-1 text-gray-700 list-disc list-inside dark:text-gray-300">
-                        <li>Founder dan CEO Lampung Cerdas.</li>
-                        <li>Founder Youth Inspiration Indonesia.</li>
-                        <li>Pembina Yayasan Pemuda Harapan Dunia</li>
-                        <li>Trainer dan Motivator</li>
-                        <li>Owner Keripik Singkong MADIR</li>
-                        <li>Master therapist Hypnotherapy Center Lampung</li>
-                        <li>Serta telah menginspirasi anak muda Indonesia lebih dari 2.700.000.</li>
-                    </ul>
-                </details>
-
-                {{-- Accordion 2 --}}
-                <details class="p-6 bg-white rounded-lg shadow-md dark:bg-gray-900">
-                    <summary class="text-xl font-semibold cursor-pointer">History Education & Certified</summary>
-                    <ul class="mt-3 space-y-1 text-gray-700 list-disc list-inside dark:text-gray-300">
-                        <li>S1 Ilmu Pemerintahan - Unila</li>
-                        <li>S2 Magister Manajemen - IIB Darmajaya</li>
-                        <li>Promotor Stifin</li>
-                        <li>Certified Instructor Hypnotherapy (CI) from Indonesian Board of Hypnotherapy (IBH)</li>
-                        <li>Certified Hypnotherapy (CHt) from Indonesian Board of Hypnotherapy (IBH)</li>
-                        <li>Certified Hypnosis (CH) from Indonesian Board of Hypnotherapy (IBH)</li>
-                        <li>Certified NLP Practitioner from Neo NLP Indonesia</li>
-                        <li>Certified NLP Master Practitioner from NLP Indonesia</li>
-                        <li>Mapping Talent Practitioner</li>
-                        <li>Certified Instructor Trainer from BNSP</li>
-                        <li>Sekolah CEO 1.0 from BisnisHack Indonesia</li>
-                        <li>Sekolah HRD from BisnisHack Indonesia</li>
-                        <li>Grounded Business Coaching (GBC) led by Coach Dr. Fahmi</li>
-                        <li>Smart Financial Map by Ilmu Keuangan</li>
-                    </ul>
-                </details>
-
-                {{-- Accordion 3 --}}
-                <details class="p-6 bg-white rounded-lg shadow-md dark:bg-gray-900">
-                    <summary class="text-xl font-semibold cursor-pointer">Program & Materi yang Sering Saya Bawakan:</summary>
-                    <div class="mt-3 space-y-4 text-gray-700 dark:text-gray-300">
-                        <p>💡 <strong>Untuk Siswa & Mahasiswa:</strong></p>
-                        <ul class="space-y-1 list-disc list-inside">
-                            <li>Strategi Lulus Kuliah Impian</li>
-                            <li>Hypno Learning & Hypno Teaching</li>
-                            <li>Membangun Mental Juara Sejak Muda</li>
-                            <li>Growth Mindset & Motivasi Prestasi</li>
-                            <li>Kuliah Gratis dan Beasiswa Impian</li>
-                            <li>Leadership & Komunikasi untuk Generasi muda</li>
-                        </ul>
-
-                        <p>🏢 <strong>Untuk Guru, Dosen & Lembaga Pendidikan:</strong></p>
-                        <ul class="space-y-1 list-disc list-inside">
-                            <li>Training Hypno Teaching</li>
-                            <li>Komunikasi Edukatif & Persuasif</li>
-                            <li>Strategi Meningkatkan Semangat Belajar Siswa</li>
-                            <li>Pelatihan Public Speaking & Presentation Skill</li>
-                        </ul>
-
-                        <p>👔 <strong>Untuk Umum, Komunitas, Instansi & Korporat:</strong></p>
-                        <ul class="space-y-1 list-disc list-inside">
-                            <li>Personal Branding & Komunikasi Berpengaruh</li>
-                            <li>Membangun Tim Hebat & Kolaboratif</li>
-                            <li>Mindset Tumbuh untuk Pemimpin Masa Depan</li>
-                            <li>Kelas Resiliensi: Bangkit dalam Tekanan</li>
-                            <li>Marketing Humanis & Closing Hypnotic</li>
-                        </ul>
-
-                        <p>📍 <strong>Fokus Saya Saat Ini:</strong></p>
-                        <ul class="space-y-1 list-disc list-inside">
-                            <li>Pengembangan SDM & kepemudaan</li>
-                            <li>Pendidikan dan mindset pertumbuhan</li>
-                            <li>Public speaking dan komunikasi efektif</li>
-                            <li>Peningkatan kualitas tenaga pendidik</li>
-                            <li>Personal development dan spiritual leadership</li>
-                        </ul>
+                <div @class(['flex flex-col md:order-1 md:pr-8', 'md:w-3/5' => $site['hero_image']])>
+                    @if ($site['hero_greeting'])
+                        <span class="self-start px-4 py-1 mb-4 text-sm font-semibold rounded-full text-amber-700 bg-amber-100 dark:text-amber-300 dark:bg-amber-500/10">
+                            {{ $site['hero_greeting'] }}
+                        </span>
+                    @endif
+                    <h1 class="mb-5 text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl">
+                        {{ $heroTitleStart }} <span class="text-amber-600 dark:text-amber-400">{{ $heroTitleEnd }}</span>
+                    </h1>
+                    <div class="mb-8 text-gray-600 prose max-w-none dark:text-gray-300 md:text-lg">
+                        {!! $site['hero_text'] !!}
                     </div>
-                </details>
-
-            </div>
-        </div>
-    </section>
-
-    {{-- Media & Publikasi Section --}}
-    <section id="media-publikasi" class="max-w-5xl px-4 py-16 mx-auto">
-        <h2 class="mb-6 text-3xl font-bold text-center">Media & Publikasi</h2>
-        <div class="max-w-4xl mx-auto rounded-lg shadow-lg">
-            <img src="/image/media.png" alt="Media & Publikasi" class="object-cover w-full h-auto rounded-lg shadow-lg">
-        </div>
-    </section>
-
-    {{-- Buku Section with 4 Images and Text Above and Below --}}
-    <section id="buku" class="max-w-5xl px-4 py-16 mx-auto">
-        <h2 class="mb-6 text-3xl font-bold text-center">Buku</h2>
-        <p class="text-2xl text-center text-gray-700 dark:text-gray-300">Saya juga seorang penulis.</p>
-        <p class="mb-6 text-xl text-center text-gray-700 dark:text-gray-300">Berikut buku-buku best seller yang pernah saya tulis.</p>
-
-        <div class="grid max-w-4xl grid-cols-2 gap-6 mx-auto mb-6 sm:grid-cols-3">
-            <img src="/image/1.jpg" alt="Buku 1" class="object-cover w-full rounded-lg shadow-lg aspect-square">
-            <img src="/image/3.jpg" alt="Buku 3" class="object-cover w-full rounded-lg shadow-lg aspect-square">
-            <img src="/image/4.jpg" alt="Buku 4" class="object-cover w-full rounded-lg shadow-lg aspect-square">
-        </div>
-
-    </section>
-
-    {{-- Artikel (Articles) Section --}}
-    <section id="artikel" class="max-w-5xl px-4 py-16 mx-auto">
-        <h2 class="mb-6 text-3xl font-bold text-center">Artikel</h2>
-        <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
-            @foreach($posts as $post)
-                <article class="overflow-hidden bg-white rounded-lg shadow dark:bg-gray-800">
-                    @if($post->image)
-                        <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}" class="object-cover w-full h-48">
-                    @else
-                        <div class="flex items-center justify-center w-full h-48 text-gray-500 bg-gray-300 dark:bg-gray-700">
-                            No Image
+                    @if (! empty($site['social_links']))
+                        <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                            @foreach ($site['social_links'] as $social)
+                                <a href="{{ $social['url'] }}" target="_blank" rel="noopener"
+                                   class="w-full px-6 py-3 font-semibold text-center text-white transition rounded-lg shadow-sm sm:w-auto hover:-translate-y-0.5 hover:shadow-md {{ $socialColors[$social['color'] ?? 'slate'] ?? $socialColors['slate'] }}">
+                                    {{ $social['label'] }}
+                                </a>
+                            @endforeach
                         </div>
                     @endif
-                    <div class="p-4">
-                        <span class="inline-block px-2 py-1 mb-2 text-xs font-semibold text-white rounded bg-amber-600">
-                            {{ $post->category->name ?? 'Uncategorized' }}
-                        </span>
-                        <h3 class="mb-2 text-lg font-semibold">
-                            <a href="{{ url('/posts/' . $post->slug) }}" class="hover:text-amber-600">
-                                {{ $post->title }}
-                            </a>
-                        </h3>
-                    </div>
-                </article>
-            @endforeach
-        </div>
-
-        {{-- Pagination --}}
-        <div class="mt-8">
-            {{ $posts->links() }}
-        </div>
-    </section>
-
-    {{-- Galeri (Gallery) Section --}}
-    <section id="galeri" class="px-4 py-16 bg-white dark:bg-gray-800">
-        <h2 class="mb-6 text-3xl font-bold text-center">Gallery</h2>
-        <div class="grid max-w-5xl grid-cols-1 gap-6 mx-auto sm:grid-cols-3">
-            @foreach($galleryItems as $item)
-                <div class="overflow-hidden transition-shadow duration-300 bg-white rounded-lg shadow-md dark:bg-gray-900 hover:shadow-lg">
-                    <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item['title'] }}" class="object-cover w-full rounded-t-lg h-50">
-                    <div class="p-4 text-center">
-                        <h3 class="text-lg font-semibold text-gray-800 truncate dark:text-gray-200" title="{{ $item['title'] }}">
-                            {{ $item['title'] }}
-                        </h3>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </section>
-
-    {{-- Achievement Section with 2 columns: left text list, right image slider --}}
-    <section id="achievement" class="max-w-5xl px-4 py-16 mx-auto">
-        <h2 class="mb-8 text-3xl font-bold text-center">Achievements</h2>
-        <div class="max-w-4xl mx-auto md:flex md:gap-12">
-            <div class="py-4 md:w-1/2">
-                <h4 class="mb-4 text-2xl font-bold text-center">Berikut beberapa Achievment :</h4>
-                {{-- Left: Achievement List --}}
-                <ul class="py-4 space-y-6 text-gray-700 list-disc list-inside dark:text-gray-300">
-                    <li class="flex items-start gap-3">
-                        <svg class="flex-shrink-0 w-6 h-6 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.388 2.462a1 1 0 00-.364 1.118l1.287 3.974c.3.922-.755 1.688-1.54 1.118l-3.388-2.462a1 1 0 00-1.175 0l-3.388 2.462c-.784.57-1.838-.196-1.54-1.118l1.287-3.974a1 1 0 00-.364-1.118L2.045 9.4c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69l1.286-3.974z"/>
-                        </svg>
-                        <a href="https://muri.org/Website/Rekor_detail/edukasi_masuk_perguruan_tinggi_secara_digital_kepada_pelajar_terbanyak" target="_blank" class="underline hover:text-amber-600" rel="noopener">
-                            Rekor MURI: Edukasi masuk perguruan tinggi secara digital kepada pelajar terbanyak
-                        </a>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <svg class="flex-shrink-0 w-6 h-6 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.388 2.462a1 1 0 00-.364 1.118l1.287 3.974c.3.922-.755 1.688-1.54 1.118l-3.388-2.462a1 1 0 00-1.175 0l-3.388 2.462c-.784.57-1.838-.196-1.54-1.118l1.287-3.974a1 1 0 00-.364-1.118L2.045 9.4c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69l1.286-3.974z"/>
-                        </svg>
-                        The Great Champions of Asia Top Millennials Choice in Education Program Award 2024
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <svg class="flex-shrink-0 w-6 h-6 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.388 2.462a1 1 0 00-.364 1.118l1.287 3.974c.3.922-.755 1.688-1.54 1.118l-3.388-2.462a1 1 0 00-1.175 0l-3.388 2.462c-.784.57-1.838-.196-1.54-1.118l1.287-3.974a1 1 0 00-.364-1.118L2.045 9.4c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69l1.286-3.974z"/>
-                        </svg>
-                        BEST PERFORMING BUSINESS WINNER 2022 – Indonesia Award Magazine
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <svg class="flex-shrink-0 w-6 h-6 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.388 2.462a1 1 0 00-.364 1.118l1.287 3.974c.3.922-.755 1.688-1.54 1.118l-3.388-2.462a1 1 0 00-1.175 0l-3.388 2.462c-.784.57-1.838-.196-1.54-1.118l1.287-3.974a1 1 0 00-.364-1.118L2.045 9.4c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69l1.286-3.974z"/>
-                        </svg>
-                        Pioner Trainer Muda (19th) Nasional asal Lampung
-                    </li>
-                </ul>
-            </div>
-
-            {{-- Right: Image Slider --}}
-            <div class="mt-8 md:w-1/2 md:mt-0">
-                <div class="relative w-full overflow-hidden rounded-lg shadow-lg">
-                    <div class="flex transition-transform duration-500 slider">
-                        <img src="/image/awward1.jpg" alt="Achievement 1" class="flex-shrink-0 object-cover w-full overflow-hidden bg-white rounded-lg shadow h-80 dark:bg-gray-800">
-                        <img src="/image/awward2.jpg" alt="Achievement 3" class="flex-shrink-0 object-cover w-full overflow-hidden bg-white rounded-lg shadow h-80 dark:bg-gray-800">
-                        <img src="/image/awward3.jpg" alt="Achievement 4" class="flex-shrink-0 object-cover w-full overflow-hidden bg-white rounded-lg shadow h-80 dark:bg-gray-800">
-                    </div>
-                    {{-- Slider controls --}}
-                    <button id="achievementPrevBtn" class="absolute p-2 text-white transition transform -translate-y-1/2 rounded-full top-1/2 left-2 bg-amber-600 hover:bg-amber-700">
-                        &#10094;
-                    </button>
-                    <button id="achievementNextBtn" class="absolute p-2 text-white transition transform -translate-y-1/2 rounded-full top-1/2 right-2 bg-amber-600 hover:bg-amber-700">
-                        &#10095;
-                    </button>
                 </div>
             </div>
+
+            {{-- Angka pencapaian --}}
+            @if ($heroStats)
+                <dl @class([
+                    'grid grid-cols-2 gap-px mt-12 overflow-hidden bg-gray-200 shadow-sm rounded-2xl dark:bg-gray-700',
+                    'md:grid-cols-4' => count($heroStats) === 4,
+                    'md:grid-cols-3' => count($heroStats) === 3,
+                ])>
+                    @foreach ($heroStats as $stat)
+                        <div class="flex flex-col px-4 py-6 text-center bg-white dark:bg-gray-800">
+                            <dt class="text-sm text-gray-500 dark:text-gray-400">{{ $stat['label'] ?? '' }}</dt>
+                            <dd class="order-first mb-1 text-2xl font-extrabold md:text-3xl text-amber-600 dark:text-amber-400">{{ $stat['value'] }}</dd>
+                        </div>
+                    @endforeach
+                </dl>
+            @endif
         </div>
     </section>
 
-    {{-- Contact Section --}}
-    <section id="contact" class="px-4 py-16 bg-white dark:bg-gray-800">
-        <h2 class="mb-6 text-3xl font-bold text-center">Contact Me</h2>
-        <div class="max-w-3xl mx-auto space-y-6 text-center text-gray-700 dark:text-gray-300">
-            <p class="text-lg">
-                Jika Anda ingin menghubungi saya untuk kerja sama atau kolaborasi, silakan hubungi melalui WhatsApp berikut:
-            </p>
-            <a href="https://wa.me/628127154447" target="_blank" rel="noopener" class="inline-block px-6 py-3 font-semibold text-white transition rounded-lg bg-emerald-500 hover:bg-emerald-700">
-                Chat Me!
-            </a>
-        </div>
-    </section>
+    {{-- About --}}
+    @if ($site['about_text'] || $site['about_image'])
+        <section id="about" class="max-w-5xl px-4 py-16 mx-auto" data-reveal>
+            <x-section-heading :title="$site['about_title']" class="mb-10" />
+            <div class="max-w-4xl mx-auto md:flex md:items-center md:gap-12">
+                @if ($site['about_image'])
+                    <div class="mb-8 overflow-hidden md:w-1/2 md:mb-0 rounded-3xl bg-gradient-to-b from-amber-100 to-amber-50 dark:from-gray-700 dark:to-gray-800">
+                        <img src="{{ asset('storage/' . $site['about_image']) }}" alt="{{ $site['about_title'] }}" loading="lazy" class="object-cover w-full h-auto">
+                    </div>
+                @endif
+                <div class="text-gray-700 prose md:w-1/2 dark:text-gray-300 md:text-lg">
+                    {!! $site['about_text'] !!}
+                </div>
+            </div>
+        </section>
+    @endif
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const slider = document.querySelector('#achievement .slider');
-        const prevBtn = document.getElementById('achievementPrevBtn');
-        const nextBtn = document.getElementById('achievementNextBtn');
-        const totalSlides = slider.children.length;
-        let index = 0;
+    {{-- Detail profil (accordion) --}}
+    @if ($profileSections->isNotEmpty())
+        <section id="detail" class="px-4 py-16 bg-white dark:bg-gray-800">
+            <div class="max-w-5xl mx-auto" data-reveal>
+                <x-section-heading :title="$site['profile_title']" class="mb-10" />
+                <div class="space-y-4">
+                    @foreach ($profileSections as $section)
+                        <details class="p-6 transition border-l-4 border-transparent shadow-sm group bg-gray-50 rounded-xl open:border-amber-500 open:shadow-md dark:bg-gray-900" @if ($loop->first) open @endif>
+                            <summary class="flex items-center justify-between gap-4 text-lg font-semibold list-none cursor-pointer md:text-xl [&::-webkit-details-marker]:hidden">
+                                {{ $section->title }}
+                                <span class="flex items-center justify-center flex-shrink-0 w-8 h-8 transition rounded-full bg-amber-100 text-amber-600 group-open:rotate-180 dark:bg-amber-500/10">
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>
+                                </span>
+                            </summary>
+                            <div class="mt-4 text-gray-700 prose max-w-none dark:text-gray-300">
+                                {!! $section->content !!}
+                            </div>
+                        </details>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
 
-        function updateSlider() {
-            slider.style.transform = `translateX(-${index * 100}%)`;
-        }
+    {{-- Media & Publikasi --}}
+    @if ($site['media_image'])
+        <section id="media-publikasi" class="max-w-5xl px-4 py-16 mx-auto" data-reveal>
+            <x-section-heading :title="$site['media_title']" class="mb-10" />
+            <div class="max-w-4xl mx-auto">
+                <img src="{{ asset('storage/' . $site['media_image']) }}" alt="{{ $site['media_title'] }}" loading="lazy" class="object-cover w-full h-auto shadow-lg rounded-xl">
+            </div>
+        </section>
+    @endif
 
-        prevBtn.addEventListener('click', () => {
-            index = (index === 0) ? totalSlides - 1 : index - 1;
-            updateSlider();
-        });
+    {{-- Buku: grid 4 kolom --}}
+    @if ($books->isNotEmpty())
+        <section id="buku" class="max-w-6xl px-4 py-16 mx-auto" data-reveal>
+            <x-section-heading :title="$site['books_title']" class="mb-4" />
+            @if ($site['books_subtitle'])
+                <p class="text-xl font-semibold text-center text-gray-700 md:text-2xl dark:text-gray-300">{{ $site['books_subtitle'] }}</p>
+            @endif
+            @if ($site['books_text'])
+                <p class="mt-1 text-center text-gray-600 md:text-lg dark:text-gray-400">{{ $site['books_text'] }}</p>
+            @endif
 
-        nextBtn.addEventListener('click', () => {
-            index = (index === totalSlides - 1) ? 0 : index + 1;
-            updateSlider();
-        });
-    });
-</script>
+            <div class="grid grid-cols-2 gap-6 mt-10 md:grid-cols-4">
+                @foreach ($books as $book)
+                    <div class="flex flex-col overflow-hidden bg-white shadow-md group rounded-xl card-lift dark:bg-gray-800">
+                        <div class="overflow-hidden bg-white">
+                            <img src="{{ asset('storage/' . $book->cover) }}" alt="{{ $book->title }}" loading="lazy" class="object-contain w-full p-3 transition duration-500 aspect-[3/4] group-hover:scale-105">
+                        </div>
+                        <div class="flex flex-col flex-1 p-4 text-center border-t-2 border-amber-500">
+                            <h3 class="font-semibold leading-snug">{{ $book->title }}</h3>
+                            @if ($book->description)
+                                <p class="mt-1 text-sm text-gray-600 dark:text-gray-400 line-clamp-3">{{ $book->description }}</p>
+                            @endif
+                            @if ($book->url)
+                                <a href="{{ $book->url }}" target="_blank" rel="noopener" class="self-center inline-block px-4 py-1.5 mt-3 text-sm font-semibold text-white transition rounded-full bg-amber-600 hover:bg-amber-700">
+                                    Lihat buku
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </section>
+    @endif
+
+    {{-- Artikel: carousel 4 per baris --}}
+    @if ($posts->isNotEmpty())
+        <section id="artikel" class="max-w-6xl px-4 py-16 mx-auto" data-reveal>
+            <div class="flex items-center justify-between gap-4 mb-8">
+                <x-section-heading :title="$site['articles_title']" align="left" />
+                <a href="{{ route('posts.index') }}" class="font-semibold text-amber-600 hover:text-amber-700 whitespace-nowrap">Lihat semua &rarr;</a>
+            </div>
+            <x-carousel :label="$site['articles_title']" :rows="2">
+                @foreach ($posts as $post)
+                    @include('posts._card', ['post' => $post, 'class' => 'carousel-item'])
+                @endforeach
+            </x-carousel>
+        </section>
+    @endif
+
+    {{-- Gallery: carousel 4 per baris, klik untuk memperbesar --}}
+    @if ($galleryItems->isNotEmpty())
+        <section id="galeri" class="px-4 py-16 bg-white dark:bg-gray-800">
+            <div class="max-w-6xl mx-auto" data-reveal>
+                <div class="flex items-center justify-between gap-4 mb-8">
+                    <x-section-heading :title="$site['gallery_title']" align="left" />
+                    <a href="{{ route('gallery.index') }}" class="font-semibold text-amber-600 hover:text-amber-700 whitespace-nowrap">Lihat semua &rarr;</a>
+                </div>
+                <x-carousel :label="$site['gallery_title']" :rows="2">
+                    @foreach ($galleryItems as $item)
+                        @include('gallery._card', ['item' => $item, 'class' => 'carousel-item'])
+                    @endforeach
+                </x-carousel>
+            </div>
+        </section>
+        <x-lightbox />
+    @endif
+
+    {{-- Achievements: daftar + slider foto --}}
+    @if ($achievements->isNotEmpty() || $achievementImages)
+        <section id="achievement" class="max-w-5xl px-4 py-16 mx-auto" data-reveal>
+            <x-section-heading :title="$site['achievements_title']" class="mb-10" />
+            <div class="max-w-5xl mx-auto md:flex md:items-center md:gap-10">
+                @if ($achievements->isNotEmpty())
+                    <div @class(['md:w-1/2' => $achievementImages])>
+                        @if ($site['achievements_subtitle'])
+                            <h3 class="mb-4 text-xl font-bold">{{ $site['achievements_subtitle'] }}</h3>
+                        @endif
+                        <ul class="space-y-3 text-gray-700 dark:text-gray-300">
+                            @foreach ($achievements as $achievement)
+                                <li class="flex items-start gap-3 p-4 bg-white shadow-sm rounded-xl dark:bg-gray-800">
+                                    <span class="flex items-center justify-center flex-shrink-0 rounded-full w-9 h-9 bg-amber-100 text-amber-600 dark:bg-amber-500/10">
+                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.974a1 1 0 00.95.69h4.18c.969 0 1.371 1.24.588 1.81l-3.388 2.462a1 1 0 00-.364 1.118l1.287 3.974c.3.922-.755 1.688-1.54 1.118l-3.388-2.462a1 1 0 00-1.175 0l-3.388 2.462c-.784.57-1.838-.196-1.54-1.118l1.287-3.974a1 1 0 00-.364-1.118L2.045 9.4c-.783-.57-.38-1.81.588-1.81h4.18a1 1 0 00.95-.69l1.286-3.974z"/>
+                                        </svg>
+                                    </span>
+                                    @if ($achievement->url)
+                                        <a href="{{ $achievement->url }}" target="_blank" rel="noopener" class="self-center underline decoration-amber-500/50 underline-offset-4 hover:text-amber-600">{{ $achievement->title }}</a>
+                                    @else
+                                        <span class="self-center">{{ $achievement->title }}</span>
+                                    @endif
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                @if ($achievementImages)
+                    <div @class(['mt-8 md:mt-0', 'md:w-1/2' => $achievements->isNotEmpty()])>
+                        <x-carousel :label="$site['achievements_title']" wrap class="!gap-0 !pt-0 !pb-0 rounded-xl shadow-lg">
+                            @foreach ($achievementImages as $image)
+                                <img src="{{ asset('storage/' . $image) }}" alt="{{ $site['achievements_title'] }} {{ $loop->iteration }}" loading="lazy"
+                                     class="object-cover w-full bg-white shrink-0 snap-start h-80 dark:bg-gray-800">
+                            @endforeach
+                        </x-carousel>
+                    </div>
+                @endif
+            </div>
+        </section>
+    @endif
+
+    {{-- Kontak: kartu ajakan kolaborasi --}}
+    @if ($site['contact_whatsapp'])
+        <section id="contact" class="px-4 pt-8 pb-20" data-reveal>
+            <div class="relative max-w-5xl px-6 py-14 mx-auto overflow-hidden text-center text-white bg-gray-900 shadow-xl rounded-3xl md:px-12 dark:bg-gray-800 dark:ring-1 dark:ring-white/10">
+                <div aria-hidden="true" class="absolute rounded-full pointer-events-none -top-24 -right-16 w-72 h-72 bg-amber-500/30 blur-3xl"></div>
+                <div aria-hidden="true" class="absolute rounded-full pointer-events-none -bottom-24 -left-16 w-72 h-72 bg-amber-400/20 blur-3xl"></div>
+
+                <div class="relative">
+                    <x-section-heading :title="$site['contact_title']" class="mb-6" />
+                    @if ($site['contact_text'])
+                        <p class="max-w-2xl mx-auto mb-8 text-lg text-gray-300">{{ $site['contact_text'] }}</p>
+                    @endif
+                    <a href="https://wa.me/{{ $site['contact_whatsapp'] }}" target="_blank" rel="noopener"
+                       class="inline-flex items-center gap-2 px-8 py-3 font-semibold text-white transition rounded-full shadow-lg bg-emerald-500 hover:bg-emerald-600 hover:-translate-y-0.5">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" /></svg>
+                        {{ $site['contact_button'] ?: 'Chat via WhatsApp' }}
+                    </a>
+                </div>
+            </div>
+        </section>
+    @endif
+</div>
 @endsection

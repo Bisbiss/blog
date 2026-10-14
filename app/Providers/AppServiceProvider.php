@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Setting;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Paginator::useBootstrap();
+        // Pengaturan situs (dikelola di dashboard) tersedia sebagai $site di semua halaman publik.
+        View::composer(['layouts.app', 'welcome', 'posts.index', 'posts.show', 'gallery.index'], function ($view) {
+            $view->with('site', Setting::values());
+        });
     }
 }

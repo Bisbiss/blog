@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\Achievement;
+use App\Models\Book;
 use App\Models\Gallery;
+use App\Models\Post;
+use App\Models\ProfileSection;
 
 class HomeController extends Controller
 {
-    /**
-     * Display a listing of latest posts.
-     */
     public function index()
     {
-        $posts = Post::with('category')->latest()->paginate(6);
-        $galleryItems = Gallery::all();
-        return view('welcome', compact('posts', 'galleryItems'));
+        return view('welcome', [
+            'profileSections' => ProfileSection::visible()->get(),
+            'books' => Book::visible()->get(),
+            'posts' => Post::with('category')->latest()->take(16)->get(),
+            'galleryItems' => Gallery::orderBy('sort_order')->latest('id')->take(16)->get(),
+            'achievements' => Achievement::visible()->get(),
+        ]);
     }
 }

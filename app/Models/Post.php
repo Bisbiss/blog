@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory; // Tambahin ini
-use Illuminate\Support\Str; // Import Str buat slugify
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
-    use HasFactory; // Tambahin ini kalo belum ada
+    use HasFactory;
 
     protected $fillable = [
         'category_id',
@@ -18,32 +18,44 @@ class Post extends Model
         'content',
     ];
 
-    // Method buat generate slug otomatis
-    protected static function boot()
+    protected static function booted(): void
     {
-        parent::boot();
-
-        // Pas Post baru dibuat (creating)
-        static::creating(function (Post $post) {
-            // Kalo slug-nya masih kosong, generate dari title
-            if (empty($post->slug)) {
-                $post->slug = Str::slug($post->title);
+        // Fallback kalau post dibuat di luar form admin (seeder, tinker, dll).
+        static::saving(function (Post $post) {
+            if (blank($post->slug)) {
+                $post->slug = static::uniqueSlug($post->title, $post->id);
             }
         });
+    }
 
-        // Pas Post di-update (updating)
-        static::updating(function (Post $post) {
-            // Kalo title berubah DAN slug-nya kosong, generate ulang dari title baru
-            if ($post->isDirty('title') && empty($post->slug)) {
-                $post->slug = Str::slug($post->title);
-            }
-            // Kalo title gak berubah tapi slug-nya diedit manual, itu biarin aja
-            // Kalo title berubah dan slug-nya diisi manual juga biarin aja
-        });
+    public static function uniqueSlug(string $title, ?int $ignoreId = null): string
+    {
+        $base = Str::slug($title) ?: 'post';
+        $slug = $base;
+        $i = 2;
+
+        while (static::where('slug', $slug)->when($ignoreId, fn ($q) => $q->whereKeyNot($ignoreId))->exists()) {
+            $slug = $base . '-' . $i++;
+        }
+
+        return $slug;
     }
 
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * Perkiraan waktu baca dalam menit (asumsi 200 kata per menit).
+     */
+    public function readingTime(): int
+    {
+        return max(1, (int) ceil(str_word_count(strip_tags((string) $this->content)) / 200));
+    }
+
+    public function excerpt(int $limit = 160): string
+    {
+        return Str::limit(trim(preg_replace('/\s+/', ' ', strip_tags($this->content))), $limit);
     }
 }
