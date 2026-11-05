@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Forms\ImageUpload;
 use App\Filament\Resources\GalleryResource\Pages;
-use App\Filament\Resources\GalleryResource\RelationManagers;
 use App\Models\Gallery;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -11,7 +11,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class GalleryResource extends Resource
 {
@@ -19,18 +18,21 @@ class GalleryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-camera';
 
+    protected static ?string $navigationGroup = 'Halaman Depan';
+
+    protected static ?int $navigationSort = 3;
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Card::make()
+                Forms\Components\Section::make()
                     ->schema([
                         Forms\Components\TextInput::make('title')
                             ->placeholder('Title')
                             ->required(),
-                        Forms\Components\FileUpload::make('image')
+                        ImageUpload::make('image', 'gallery')
                             ->label('Image')
-                            ->placeholder('Image')
                             ->required(),
                     ])
             ]);
@@ -43,6 +45,8 @@ class GalleryResource extends Resource
                 Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('title')->searchable(),
             ])
+            ->reorderable('sort_order')
+            ->defaultSort('sort_order')
             ->filters([
                 Tables\Filters\Filter::make('created_at')
                     ->form([

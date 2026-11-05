@@ -1,3 +1,81 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    /* Lebar item carousel: 1 item (+ intip item berikutnya) di HP, 2 di tablet, 4 di desktop */
+    .carousel-item {
+        @apply shrink-0 snap-start w-[80%] sm:w-[calc((100%_-_1.5rem)/2)] lg:w-[calc((100%_-_4.5rem)/4)];
+    }
+
+    /* Varian 2 baris: kolom grid selebar .carousel-item, item mengikuti lebar kolomnya */
+    .carousel-rows-2 {
+        @apply auto-cols-[80%] sm:auto-cols-[calc((100%_-_1.5rem)/2)] lg:auto-cols-[calc((100%_-_4.5rem)/4)];
+    }
+    .carousel-rows-2 > .carousel-item {
+        @apply w-auto;
+    }
+
+    /* Gaya dasar untuk konten dari rich editor (artikel, profil, dll) */
+    .prose {
+        @apply leading-relaxed;
+    }
+    .prose > * + * {
+        @apply mt-4;
+    }
+    .prose h2 {
+        @apply mt-8 text-2xl font-bold;
+    }
+    .prose h3 {
+        @apply mt-6 text-xl font-semibold;
+    }
+    .prose a {
+        @apply underline text-amber-600 hover:text-amber-700 dark:text-amber-400;
+    }
+    .prose ul {
+        @apply pl-6 space-y-1 list-disc;
+    }
+    .prose ol {
+        @apply pl-6 space-y-1 list-decimal;
+    }
+    .prose blockquote {
+        @apply pl-4 italic border-l-4 border-amber-500;
+    }
+    .prose img {
+        @apply h-auto max-w-full rounded-lg;
+    }
+    .prose pre {
+        @apply p-4 overflow-x-auto bg-gray-100 rounded dark:bg-gray-800;
+    }
+
+    /* Kartu yang sedikit terangkat saat disorot */
+    .card-lift {
+        @apply transition duration-300 hover:-translate-y-1 hover:shadow-xl;
+    }
+
+    /* Animasi muncul saat scroll (lihat resources/js/reveal.js) */
+    [data-reveal] {
+        transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal-pending {
+        opacity: 0;
+        transform: translateY(1.5rem);
+    }
+
+    /* Tombol kembali ke atas */
+    [data-back-to-top] {
+        @apply invisible opacity-0 translate-y-4;
+    }
+    [data-back-to-top].is-visible {
+        @apply visible opacity-100 translate-y-0;
+    }
+}
+
+@layer utilities {
+    .no-scrollbar {
+        scrollbar-width: none;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+}

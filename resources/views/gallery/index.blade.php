@@ -1,38 +1,29 @@
 @extends('layouts.app')
 
-@section('title', 'Gallery')
+@section('title', 'Galeri Kegiatan Seminar & Pelatihan')
+@section('meta_description', 'Dokumentasi seminar, workshop, dan pelatihan bersama ' . $site['site_name'] . ' di Lampung dan berbagai kota di Indonesia.')
 
 @section('content')
-<div class="row">
-    <div class="col-md-12 mb-4">
-        <h1>Photo Gallery</h1>
+<div class="px-4 py-10 mx-auto max-w-6xl">
+    <div class="mb-10 text-center">
+        <h1 class="text-3xl font-extrabold tracking-tight md:text-4xl">{{ $site['gallery_title'] }}</h1>
+        <span class="block w-16 h-1 mx-auto mt-3 rounded-full bg-amber-500" aria-hidden="true"></span>
     </div>
-</div>
 
-<div class="row">
-    @forelse($galleries as $gallery)
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                @if($gallery->image)
-                    <img src="{{ asset('storage/' . $gallery->image) }}" class="card-img-top" alt="{{ $gallery->title }}">
-                @endif
-                <div class="card-body text-center">
-                    <h5 class="card-title">{{ $gallery->title }}</h5>
-                </div>
-            </div>
+    @if ($galleries->isNotEmpty())
+        <div class="grid grid-cols-2 gap-4 md:gap-6 lg:grid-cols-4">
+            @foreach ($galleries as $item)
+                @include('gallery._card', ['item' => $item])
+            @endforeach
         </div>
-    @empty
-        <div class="col-md-12">
-            <div class="alert alert-info">
-                No gallery images found.
-            </div>
-        </div>
-    @endforelse
-</div>
+    @else
+        <p class="text-center text-gray-600 dark:text-gray-400">Belum ada foto.</p>
+    @endif
 
-<div class="row mt-4">
-    <div class="col-md-12">
+    <div class="mt-8">
         {{ $galleries->links() }}
     </div>
 </div>
+
+<x-lightbox />
 @endsection

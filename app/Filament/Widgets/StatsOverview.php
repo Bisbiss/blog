@@ -2,9 +2,10 @@
 
 namespace App\Filament\Widgets;
 
-use App\Models\Post;
+use App\Models\Book;
 use App\Models\Category;
 use App\Models\Gallery;
+use App\Models\Post;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -24,6 +25,10 @@ class StatsOverview extends BaseWidget
             Stat::make('Jumlah Kategori', Category::count())
                 ->description('Kategori yang tersedia')
                 ->color('warning'),
+
+            Stat::make('Jumlah Buku', Book::count())
+                ->description('Buku yang ditampilkan di beranda')
+                ->color('info'),
         ];
     }
 }

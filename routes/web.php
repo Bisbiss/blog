@@ -1,16 +1,22 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Models\Post;
-use App\Models\Gallery;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SeoController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\SitemapController;
+use Illuminate\Support\Facades\Route;
 
-// Route untuk Home
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Route untuk Daftar Post
-Route::get('/posts', [PostController::class, 'index']);
+Route::get('/pemateri-trainer-lampung', [ServiceController::class, 'index'])->name('services');
 
-// Route untuk Detail Post
-Route::get('/posts/{slug}', [PostController::class, 'showBySlug']);
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Route::get('/posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
+
+Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
+
+Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
+Route::get('/robots.txt', [SeoController::class, 'robots'])->name('robots');
+Route::get('/llms.txt', [SeoController::class, 'llms'])->name('llms');
