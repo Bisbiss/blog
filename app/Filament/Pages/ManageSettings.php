@@ -50,6 +50,10 @@ class ManageSettings extends Page implements HasForms
                                     ->helperText('Dipakai di judul tab browser, contoh: "Artikel - Syaifulloh".')
                                     ->required()
                                     ->maxLength(100),
+                                Forms\Components\TextInput::make('home_title')
+                                    ->label('Judul halaman beranda (title tag)')
+                                    ->helperText('Judul utama di hasil Google. Idealnya ≤ 60 karakter dan memuat kata kunci, contoh: "Syaifulloh | Pemateri & Trainer Lampung".')
+                                    ->maxLength(100),
                                 Forms\Components\Textarea::make('site_description')
                                     ->label('Deskripsi situs (meta description)')
                                     ->helperText('Idealnya 120–160 karakter. Tampil di hasil pencarian Google.')
@@ -79,6 +83,10 @@ class ManageSettings extends Page implements HasForms
                                             ->label('Judul')
                                             ->required(),
                                     ]),
+                                Forms\Components\TextInput::make('hero_tagline')
+                                    ->label('Tagline di bawah nama')
+                                    ->helperText('Bagian dari heading utama (H1). Isi dengan kata kunci utama, contoh: "Pemateri, Trainer & Motivator Lampung".')
+                                    ->maxLength(120),
                                 Forms\Components\RichEditor::make('hero_text')
                                     ->label('Perkenalan')
                                     ->toolbarButtons(['bold', 'italic', 'link', 'bulletList', 'orderedList', 'undo', 'redo']),
@@ -192,6 +200,98 @@ class ManageSettings extends Page implements HasForms
                                             ->multiple()
                                             ->reorderable()
                                             ->panelLayout('grid'),
+                                    ]),
+                            ]),
+
+                        Forms\Components\Tabs\Tab::make('SEO & Layanan')
+                            ->icon('heroicon-o-magnifying-glass')
+                            ->schema([
+                                Forms\Components\Section::make('Identitas untuk Google & AI')
+                                    ->description('Dipakai di structured data (schema.org) dan /llms.txt supaya Google, ChatGPT, Gemini, dan Perplexity mengenali Anda sebagai pemateri/trainer di Lampung.')
+                                    ->collapsible()
+                                    ->schema([
+                                        Forms\Components\Grid::make(2)
+                                            ->schema([
+                                                Forms\Components\TextInput::make('seo_city')
+                                                    ->label('Kota domisili')
+                                                    ->placeholder('Bandar Lampung'),
+                                                Forms\Components\TextInput::make('seo_region')
+                                                    ->label('Provinsi')
+                                                    ->placeholder('Lampung'),
+                                                Forms\Components\TextInput::make('organization_name')
+                                                    ->label('Nama lembaga yang didirikan'),
+                                                Forms\Components\TextInput::make('organization_url')
+                                                    ->label('Website lembaga')
+                                                    ->url(),
+                                            ]),
+                                        Forms\Components\TagsInput::make('job_titles')
+                                            ->label('Profesi')
+                                            ->helperText('Tekan Enter setelah tiap item.'),
+                                        Forms\Components\TagsInput::make('knows_about')
+                                            ->label('Bidang keahlian'),
+                                        Forms\Components\TagsInput::make('credentials')
+                                            ->label('Sertifikasi'),
+                                        Forms\Components\TagsInput::make('alumni_of')
+                                            ->label('Kampus almamater'),
+                                    ]),
+                                Forms\Components\Section::make('Halaman Layanan (/pemateri-trainer-lampung)')
+                                    ->collapsible()
+                                    ->schema([
+                                        Forms\Components\TextInput::make('services_title')
+                                            ->label('Judul halaman (H1)')
+                                            ->maxLength(120),
+                                        Forms\Components\Textarea::make('services_intro')
+                                            ->label('Paragraf pembuka')
+                                            ->helperText('Jawab langsung "siapa Anda & apa layanannya" dalam 2–3 kalimat. Paragraf ini sering dikutip mesin AI.')
+                                            ->rows(4),
+                                        Forms\Components\Repeater::make('services')
+                                            ->label('Program pelatihan')
+                                            ->schema([
+                                                Forms\Components\TextInput::make('title')
+                                                    ->label('Nama program')
+                                                    ->required(),
+                                                Forms\Components\TextInput::make('audience')
+                                                    ->label('Untuk siapa'),
+                                                Forms\Components\Textarea::make('description')
+                                                    ->label('Deskripsi')
+                                                    ->rows(2)
+                                                    ->columnSpanFull(),
+                                                Forms\Components\TagsInput::make('topics')
+                                                    ->label('Topik')
+                                                    ->columnSpanFull(),
+                                            ])
+                                            ->columns(2)
+                                            ->reorderable()
+                                            ->collapsible()
+                                            ->itemLabel(fn (array $state): ?string => $state['title'] ?? null)
+                                            ->defaultItems(0)
+                                            ->addActionLabel('Tambah program'),
+                                        Forms\Components\TagsInput::make('service_formats')
+                                            ->label('Format acara'),
+                                        Forms\Components\TagsInput::make('area_served')
+                                            ->label('Area layanan')
+                                            ->helperText('Kabupaten/kota yang dilayani. Item yang memuat kata "Indonesia" dibaca sebagai cakupan nasional.'),
+                                    ]),
+                                Forms\Components\Section::make('FAQ')
+                                    ->description('Tampil di halaman layanan dan dibaca Google/AI sebagai FAQPage. Tulis pertanyaan seperti orang mengetik di Google.')
+                                    ->collapsible()
+                                    ->schema([
+                                        Forms\Components\Repeater::make('faqs')
+                                            ->hiddenLabel()
+                                            ->schema([
+                                                Forms\Components\TextInput::make('question')
+                                                    ->label('Pertanyaan')
+                                                    ->required(),
+                                                Forms\Components\Textarea::make('answer')
+                                                    ->label('Jawaban')
+                                                    ->rows(3)
+                                                    ->required(),
+                                            ])
+                                            ->reorderable()
+                                            ->collapsible()
+                                            ->itemLabel(fn (array $state): ?string => $state['question'] ?? null)
+                                            ->defaultItems(0)
+                                            ->addActionLabel('Tambah pertanyaan'),
                                     ]),
                             ]),
 

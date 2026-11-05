@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Gallery')
-@section('meta_description', 'Galeri foto kegiatan ' . $site['site_name'] . '.')
+@section('title', 'Galeri Kegiatan Seminar & Pelatihan')
+@section('meta_description', 'Dokumentasi seminar, workshop, dan pelatihan bersama ' . $site['site_name'] . ' di Lampung dan berbagai kota di Indonesia.')
 
 @section('content')
 <div class="px-4 py-10 mx-auto max-w-6xl">

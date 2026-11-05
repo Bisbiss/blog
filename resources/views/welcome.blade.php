@@ -1,6 +1,19 @@
 @extends('layouts.app')
 
-@section('title', 'Home')
+@section('full_title', $site['home_title'])
+
+@push('schema')
+    {!! \App\Support\StructuredData::render([[
+        '@type' => 'ProfilePage',
+        '@id' => route('home') . '#webpage',
+        'url' => route('home'),
+        'name' => $site['home_title'] ?: $site['site_name'],
+        'inLanguage' => 'id-ID',
+        'isPartOf' => ['@id' => \App\Support\StructuredData::websiteId()],
+        'mainEntity' => ['@id' => \App\Support\StructuredData::personId()],
+        'about' => ['@id' => \App\Support\StructuredData::personId()],
+    ]]) !!}
+@endpush
 
 @php
     // Kelas lengkap ditulis di sini supaya terdeteksi Tailwind saat build
@@ -20,6 +33,7 @@
     $heroTitle = trim((string) $site['hero_title']);
     $heroTitleStart = str_contains($heroTitle, ' ') ? Str::beforeLast($heroTitle, ' ') : '';
     $heroTitleEnd = str_contains($heroTitle, ' ') ? Str::afterLast($heroTitle, ' ') : $heroTitle;
+    $services = array_values(array_filter((array) $site['services'], fn ($s) => filled($s['title'] ?? null)));
 @endphp
 
 @section('content')
@@ -39,7 +53,7 @@
                 @if ($site['hero_image'])
                     <div class="relative max-w-sm mx-auto mb-8 md:order-2 md:w-2/5 md:max-w-none md:mb-0">
                         <div aria-hidden="true" class="absolute rounded-full inset-x-[8%] bottom-0 aspect-square bg-gradient-to-tr from-amber-500 to-amber-300 dark:from-amber-600 dark:to-amber-400"></div>
-                        <img src="{{ asset('storage/' . $site['hero_image']) }}" alt="{{ $site['hero_title'] }}" class="relative w-full h-auto">
+                        <img src="{{ asset('storage/' . $site['hero_image']) }}" alt="{{ $site['site_name'] }}{{ $site['hero_tagline'] ? ', ' . $site['hero_tagline'] : '' }}" fetchpriority="high" class="relative w-full h-auto">
                     </div>
                 @endif
 
@@ -51,6 +65,9 @@
                     @endif
                     <h1 class="mb-5 text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl">
                         {{ $heroTitleStart }} <span class="text-amber-600 dark:text-amber-400">{{ $heroTitleEnd }}</span>
+                        @if ($site['hero_tagline'])
+                            <span class="block mt-3 text-xl font-bold tracking-normal text-gray-600 md:text-2xl dark:text-gray-300">{{ $site['hero_tagline'] }}</span>
+                        @endif
                     </h1>
                     <div class="mb-8 text-gray-600 prose max-w-none dark:text-gray-300 md:text-lg">
                         {!! $site['hero_text'] !!}
@@ -103,14 +120,44 @@
         </section>
     @endif
 
+    {{-- Layanan: ringkasan program, mengarah ke halaman pilar /pemateri-trainer-lampung --}}
+    @if ($services)
+        <section id="layanan" class="px-4 py-16 bg-white dark:bg-gray-800">
+            <div class="max-w-6xl mx-auto" data-reveal>
+                <x-section-heading :title="$site['services_title']" class="mb-4" />
+                <p class="max-w-3xl mx-auto mb-10 text-center text-gray-600 md:text-lg dark:text-gray-400">
+                    Seminar, workshop, dan pelatihan untuk sekolah, kampus, instansi, perusahaan, dan UMKM — di Lampung dan seluruh Indonesia.
+                </p>
+                <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    @foreach (array_slice($services, 0, 6) as $service)
+                        <div class="flex flex-col p-6 border-t-4 shadow-sm rounded-xl bg-gray-50 border-amber-500 dark:bg-gray-900">
+                            <h3 class="text-lg font-bold leading-snug">{{ $service['title'] }}</h3>
+                            @if (filled($service['audience'] ?? null))
+                                <p class="mt-1 text-sm font-semibold text-amber-700 dark:text-amber-400">{{ $service['audience'] }}</p>
+                            @endif
+                            @if (filled($service['description'] ?? null))
+                                <p class="mt-3 text-sm text-gray-600 dark:text-gray-400">{{ $service['description'] }}</p>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+                <div class="mt-10 text-center">
+                    <a href="{{ route('services') }}" class="inline-block px-6 py-3 font-semibold text-white transition rounded-lg shadow-sm bg-amber-600 hover:bg-amber-700">
+                        Lihat program &amp; cara mengundang pemateri &rarr;
+                    </a>
+                </div>
+            </div>
+        </section>
+    @endif
+
     {{-- Detail profil (accordion) --}}
     @if ($profileSections->isNotEmpty())
-        <section id="detail" class="px-4 py-16 bg-white dark:bg-gray-800">
+        <section id="detail" class="px-4 py-16">
             <div class="max-w-5xl mx-auto" data-reveal>
                 <x-section-heading :title="$site['profile_title']" class="mb-10" />
                 <div class="space-y-4">
                     @foreach ($profileSections as $section)
-                        <details class="p-6 transition border-l-4 border-transparent shadow-sm group bg-gray-50 rounded-xl open:border-amber-500 open:shadow-md dark:bg-gray-900" @if ($loop->first) open @endif>
+                        <details class="p-6 transition bg-white border-l-4 border-transparent shadow-sm group rounded-xl open:border-amber-500 open:shadow-md dark:bg-gray-800" @if ($loop->first) open @endif>
                             <summary class="flex items-center justify-between gap-4 text-lg font-semibold list-none cursor-pointer md:text-xl [&::-webkit-details-marker]:hidden">
                                 {{ $section->title }}
                                 <span class="flex items-center justify-center flex-shrink-0 w-8 h-8 transition rounded-full bg-amber-100 text-amber-600 group-open:rotate-180 dark:bg-amber-500/10">

@@ -1,11 +1,18 @@
 @php
-    $pageTitle = trim($__env->yieldContent('title'));
-    $fullTitle = $pageTitle ? $pageTitle . ' - ' . $site['site_name'] : $site['site_name'];
+    // Nilai @section('x', $nilai) sudah di-escape Blade; di-decode dulu supaya tidak dobel escape saat dicetak
+    $section = fn (string $name) => html_entity_decode(trim($__env->yieldContent($name)), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    $pageTitle = $section('title');
+    $fullTitle = $section('full_title') ?: ($pageTitle ? $pageTitle . ' - ' . $site['site_name'] : $site['site_name']);
+    $metaDescription = $section('meta_description') ?: $site['site_description'];
     $logo = $site['logo'] ? asset('storage/' . $site['logo']) : null;
     $defaultShareImage = $site['og_image'] ?: $site['hero_image'];
-    $shareImage = trim($__env->yieldContent('meta_image')) ?: ($defaultShareImage ? asset('storage/' . $defaultShareImage) : null);
+    $shareImage = $section('meta_image') ?: ($defaultShareImage ? asset('storage/' . $defaultShareImage) : null);
+    // Halaman paginasi (?page=2) punya canonical sendiri supaya tidak dianggap duplikat halaman 1
+    $page = (int) request()->query('page', 1);
+    $canonical = url()->current() . ($page > 1 ? '?page=' . $page : '');
     $navLinks = [
         ['label' => 'Beranda', 'route' => 'home'],
+        ['label' => 'Layanan', 'route' => 'services'],
         ['label' => 'Artikel', 'route' => 'posts.index'],
         ['label' => 'Gallery', 'route' => 'gallery.index'],
     ];
@@ -16,25 +23,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $fullTitle }}</title>
-    <meta name="description" content="@yield('meta_description', $site['site_description'])">
+    <meta name="description" content="{{ $metaDescription }}">
     @if ($site['site_keywords'])
         <meta name="keywords" content="{{ $site['site_keywords'] }}">
     @endif
     <meta name="author" content="{{ $site['site_name'] }}">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="{{ url()->current() }}">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="{{ $canonical }}">
+    <link rel="alternate" type="text/plain" title="Ringkasan untuk AI (llms.txt)" href="{{ route('llms') }}">
+
+    {{-- Sinyal lokasi (SEO lokal Lampung) --}}
+    <meta name="geo.region" content="ID-LA">
+    @if ($site['seo_city'])
+        <meta name="geo.placename" content="{{ $site['seo_city'] }}, {{ $site['seo_region'] }}">
+    @endif
 
     {{-- Open Graph & Twitter: tampilan saat link dibagikan --}}
     <meta property="og:site_name" content="{{ $site['site_name'] }}">
     <meta property="og:type" content="@yield('og_type', 'website')">
     <meta property="og:title" content="{{ $fullTitle }}">
-    <meta property="og:description" content="@yield('meta_description', $site['site_description'])">
-    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:description" content="{{ $metaDescription }}">
+    <meta property="og:url" content="{{ $canonical }}">
     <meta property="og:locale" content="id_ID">
     @if ($shareImage)
         <meta property="og:image" content="{{ $shareImage }}">
+        <meta property="og:image:alt" content="{{ $fullTitle }}">
     @endif
     <meta name="twitter:card" content="{{ $shareImage ? 'summary_large_image' : 'summary' }}">
+    <meta name="twitter:title" content="{{ $fullTitle }}">
+    <meta name="twitter:description" content="{{ $metaDescription }}">
+    @if ($shareImage)
+        <meta name="twitter:image" content="{{ $shareImage }}">
+    @endif
+
+    {{-- Structured data: identitas situs & Syaifulloh, ditambah node khusus dari tiap halaman --}}
+    {!! \App\Support\StructuredData::render(\App\Support\StructuredData::base($site)) !!}
+    @stack('schema')
 
     @if ($logo)
         <link rel="icon" href="{{ $logo }}">
@@ -96,6 +120,12 @@
                 </a>
                 @if ($site['site_description'])
                     <p class="mt-4 text-sm leading-relaxed">{{ $site['site_description'] }}</p>
+                @endif
+                @if ($site['seo_city'])
+                    <p class="mt-3 text-sm">
+                        Berbasis di {{ $site['seo_city'] }}, {{ $site['seo_region'] }} —
+                        <a href="{{ route('services') }}" class="underline decoration-amber-500/50 underline-offset-4 hover:text-amber-400">melayani undangan pemateri &amp; trainer di seluruh Indonesia</a>.
+                    </p>
                 @endif
             </div>
 

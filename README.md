@@ -26,6 +26,7 @@ Semua konten halaman depan dikelola dari dashboard `/admin`:
 | Menu                                 | Isi                                                                   |
 | ------------------------------------ | --------------------------------------------------------------------- |
 | **Pengaturan → Pengaturan Situs**    | Nama situs & SEO, logo, hero, about, judul tiap bagian, foto slider achievement, kontak WhatsApp, footer |
+| **Pengaturan → SEO & Layanan**       | Identitas untuk Google/AI (kota, profesi, sertifikasi), halaman `/pemateri-trainer-lampung` (program, format, area layanan), FAQ |
 | **Halaman Depan → Detail Profil**    | Accordion detail profil                                               |
 | **Halaman Depan → Buku**             | Daftar buku (grid 4 kolom)                                            |
 | **Halaman Depan → Gallery**          | Foto gallery (carousel di beranda, halaman `/gallery`)               |
@@ -46,4 +47,8 @@ php artisan make:filament-user                  # membuat akun admin
 ```
 
 `SiteContentSeeder` aman dijalankan ulang — data yang sudah ada tidak ditimpa.
-Sitemap tersedia di `/sitemap.xml`.
+## SEO & GEO
+
+- `/pemateri-trainer-lampung` — halaman pilar untuk kata kunci pemateri / trainer / workshop / pelatihan Lampung & Indonesia.
+- Structured data (JSON-LD) otomatis: `Person` + `WebSite` di semua halaman, `ProfessionalService` + `FAQPage` di halaman layanan, `BlogPosting` + `BreadcrumbList` di artikel.
+- `/sitemap.xml`, `/robots.txt`, dan `/llms.txt` (ringkasan untuk ChatGPT, Claude, Perplexity, Gemini) dibuat dinamis dari isi dashboard.

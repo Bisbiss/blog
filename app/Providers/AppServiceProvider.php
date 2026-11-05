@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Pengaturan situs (dikelola di dashboard) tersedia sebagai $site di semua halaman publik.
-        View::composer(['layouts.app', 'welcome', 'posts.index', 'posts.show', 'gallery.index'], function ($view) {
+        View::composer(['layouts.app', 'welcome', 'services.index', 'posts.index', 'posts.show', 'gallery.index'], function ($view) {
             $view->with('site', Setting::values());
         });
     }
